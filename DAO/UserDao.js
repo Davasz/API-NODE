@@ -61,7 +61,22 @@ class UserDao {
     }
 
     delete(id) {
-
+        return new Promise( async (resolve, reject) => {
+            
+            db.query(
+                'DELETE FROM users WHERE id = ?', [id],
+                (err, resul) => {
+                    if(err) {
+                        reject(err)
+                    } else if(resul.affectedRows == 0) {
+                        resolve({
+                            mensage: 'Usuário nao encontrado'
+                        })
+                    } else {
+                        resolve(resul)
+                    }
+                })
+        })
     }
 
 }

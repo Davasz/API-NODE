@@ -31,10 +31,22 @@ exports.findAllUsers =  async (req, res) => {
 exports.findUserById = async (req, res) => {
     try {
         const {id} = req.params
-        console.log(id)
+    
         const userQuery = await userDao.findById(id)
 
         res.status(200).json(userQuery)
+    } catch (error) {
+        res.status(500).json({ error: 'Erro interno do servidor' })
+    }
+}
+
+exports.deleteUserById = async (req, res) => {
+    try {
+        const {id} = req.params
+
+        const userDeleted = await userDao.delete(id)
+        console.log(userDeleted)
+        res.send(userDeleted)
     } catch (error) {
         res.status(500).json({ error: 'Erro interno do servidor' })
     }
