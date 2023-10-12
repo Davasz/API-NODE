@@ -51,3 +51,12 @@ exports.deleteUserById = async (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor' })
     }
 }
+
+exports.updateUser = async (req, res) => {
+    try {
+        const updateUser = await userDao.update(req.body)
+        res.send(updateUser)
+    } catch (error) {
+       console.log(error)
+    }
+}
