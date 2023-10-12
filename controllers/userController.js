@@ -7,14 +7,14 @@ const userDao = new UserDao();
 exports.saveUser = async (req, res) => {
     try {
         const { name, tel_number, password, confirmPassword } = req.body;
-        const newUser = new User(null, name, tel_number, password);
+        const newUser = new User(null, name, tel_number, password, confirmPassword);
 
         const savedUser = await userDao.save(newUser);
 
         res.status(201).json(savedUser);
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: 'Erro interno do servidor' })
+        res.status(error.status).json(error)
     }
 }
 
