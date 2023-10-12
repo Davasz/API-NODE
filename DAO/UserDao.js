@@ -27,6 +27,10 @@ class UserDao {
                 (err, resul) => {
                     if (err) {
                         reject(err)
+                    } else if(resul.length == 0) {
+                        resolve({
+                            mensage: 'Usuário não encontrado!'
+                        })
                     } else {
                         resolve(resul)
                     }
