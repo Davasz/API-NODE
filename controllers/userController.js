@@ -13,7 +13,6 @@ exports.saveUser = async (req, res) => {
 
         res.status(201).json(savedUser);
     } catch (error) {
-        console.log(error)
         res.status(error.status).json(error)
     }
 }
@@ -24,7 +23,7 @@ exports.findAllUsers =  async (req, res) => {
 
         res.status(200).json(usersQuery)
     } catch (error) {
-        res.status(500).json({error: 'Erro interno do servidor'})
+        res.status(error.status).json(error)
     }
 }
 
@@ -36,7 +35,7 @@ exports.findUserById = async (req, res) => {
 
         res.status(200).json(userQuery)
     } catch (error) {
-        res.status(500).json({ error: 'Erro interno do servidor' })
+        res.status(error.status).json(error)
     }
 }
 
@@ -48,7 +47,7 @@ exports.deleteUserById = async (req, res) => {
         console.log(userDeleted)
         res.send(userDeleted)
     } catch (error) {
-        res.status(500).json({ error: 'Erro interno do servidor' })
+        res.status(error.status).json(error)
     }
 }
 
@@ -57,6 +56,6 @@ exports.updateUser = async (req, res) => {
         const updateUser = await userDao.update(req.body)
         res.send(updateUser)
     } catch (error) {
-       console.log(error)
+        res.status(error.status).json(error)
     }
 }
